@@ -155,7 +155,7 @@ export class Tagging {
         let cnNameHtml = '';
         let enNameHtml;
         if (tag.ns) {
-            cnNameHtml += escapeHtml(cnNamespace) + '：';
+            cnNameHtml += escapeHtml(cnNamespace) + '▸';
         }
         if (suggestion.match.cn) {
             const range = suggestion.match.cn;
