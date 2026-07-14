@@ -1,6 +1,6 @@
 import dict from './dict.yml';
 
-const CN2JP = Object.freeze(dict as Record<string, readonly string[]>);
+const CN2JP = Object.freeze((dict ?? {}) as Record<string, readonly string[]>);
 
 const JP2CN = Object.freeze(Object.fromEntries(Object.entries(CN2JP).flatMap(([k, v]) => v.map((vv) => [vv, k]))));
 
