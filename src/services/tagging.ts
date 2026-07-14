@@ -133,20 +133,20 @@ export class Tagging {
     readonly suggestUrl = 'https://forums.e-hentai.org/index.php?showtopic=246656';
 
     readonly namespaceTranslate: Record<EHTNamespaceName, string> = {
-        rows: '行名',
-        artist: '艺术家',
-        cosplayer: 'Coser',
-        parody: '原作',
-        character: '角色',
-        group: '团队',
-        language: '语言',
-        other: '其他',
-        female: '女',
-        male: '男',
-        mixed: '混',
-        location: '地点',
-        reclass: '重新分类',
-        temp: '临时',
+        rows: 'rows',
+        artist: 'artist',
+        cosplayer: 'cosplayer',
+        parody: 'parody',
+        character: 'character',
+        group: 'group',
+        language: 'language',
+        other: 'other',
+        female: 'female',
+        male: 'male',
+        mixed: 'mixed',
+        location: 'location',
+        reclass: 'reclass',
+        temp: 'temp',
     };
 
     makeTagMatchHtml(suggestion: Suggestion, markTag = 'mark'): { en: string; cn: string } {
