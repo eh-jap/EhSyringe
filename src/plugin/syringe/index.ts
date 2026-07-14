@@ -218,7 +218,7 @@ class TagNodeRef {
             else value = `${this.service.tagging.ns(originalNs)}:${value}`;
         }
         this.node.innerHTML = value;
-        this.node.setAttribute('lang', 'zh-hans');
+        this.node.setAttribute('lang', 'ja');
         return true;
     }
 }
@@ -392,7 +392,7 @@ export class Syringe {
             node.classList.add('ehs-translate-tag');
         }
         if (this.config.translateUi) {
-            node.setAttribute('lang', 'zh-hans');
+            node.setAttribute('lang', 'ja');
         } else {
             node.setAttribute('lang', 'en');
         }
