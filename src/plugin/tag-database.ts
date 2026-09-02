@@ -7,8 +7,12 @@ import { Tagging } from 'services/tagging';
 import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-/* 数据存储结构版本, 如果不同 系统会自动执行 storageTagData 重新构建数据*/
-/* 注意这是本地数据结构, 主要用于 storageTagData内解析方法发生变化, 重新加载数据的, 与线上无关*/
+/* update() parses the given remote tag database JSON and saves to a local structure for
+ * use and caches it to storage. Normally, EhSyringe loads back the cached version on
+ * startup. When the version value here is changed, this process is forced to be done
+ * from scratch again, allowing changes to format of the local representation.
+ *
+ * Note that this has nothing to do with format of the downloaded tag database. */
 const DATA_STRUCTURE_VERSION = 12;
 
 interface Data {

@@ -523,7 +523,7 @@ export class Syringe {
 
         if (
             this.config.translateTimestamp &&
-            // 快速判断是否有可能包含时间戳
+            // If the input can possibly contain a time string at all
             repText.includes(':')
         ) {
             repText = repText.replace(
