@@ -4,7 +4,6 @@ const CN2JP = Object.freeze((dict ?? {}) as Record<string, readonly string[]>);
 
 const JP2CN = Object.freeze(Object.fromEntries(Object.entries(CN2JP).flatMap(([k, v]) => v.map((vv) => [vv, k]))));
 
-/** 检查是否为 ASCII */
 export function isASCII(text: string): boolean {
     for (let i = 0, n = text.length; i < n; i++) {
         if (text.charCodeAt(i) >= 0x80) return false;
@@ -12,7 +11,6 @@ export function isASCII(text: string): boolean {
     return true;
 }
 
-/** 转为中文汉字 */
 export function toCN(text: string): string {
     let ret = '';
     for (const ch of text) {
@@ -22,7 +20,6 @@ export function toCN(text: string): string {
 }
 
 const MAX_COMBINE = 16;
-/** 转为日文汉字 */
 export function toJP(text: string): string[] {
     let res = [''];
     for (const ch of text) {
