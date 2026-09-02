@@ -411,7 +411,7 @@ export class Popup {
                     <tr>
                         <th>标签版本：</th>
                         <td>
-                            <a href="https://github.com/EhTagTranslation/Database/tree/${state.sha}" class="monospace"
+                            <a href="https://github.com/eh-jap/Database/tree/${state.sha}" class="monospace"
                                 >${state.sha || ' --- '}</a
                             >
                         </td>
@@ -429,7 +429,7 @@ export class Popup {
                                 ${state.versionInfo}
                                 <a
                                     class="monospace ${state.updateAvailable ? '' : 'hidden'}"
-                                    href="https://github.com/EhTagTranslation/Database/tree/${state.newSha}"
+                                    href="https://github.com/eh-jap/Database/tree/${state.newSha}"
                                 >
                                     ${state.newSha || ''}
                                 </a>

@@ -12,7 +12,7 @@ export class Database {
         readonly logger: Logger,
     ) {}
     async getLatestVersion(): Promise<GithubRelease> {
-        const githubDownloadUrl = 'https://ehtt.fly.dev/octokit/release'; // 'https://api.github.com/repos/ehtagtranslation/Database/releases/latest';
+        const githubDownloadUrl = 'https://ehjp.cooked-potatoes.workers.dev/'; // 'https://api.github.com/repos/eh-jap/Database/releases/latest';
         const info = await this.http.json<GithubRelease | { message: string }>(githubDownloadUrl);
         if (!('target_commitish' in info)) {
             if (typeof info.message != 'string') {
@@ -27,25 +27,11 @@ export class Database {
     }
 
     private dataUrls(version: GithubRelease): string[] {
-        const dataJson = /<!--(.+?)-->/gis.exec(version.body);
-        if (!dataJson) throw new Error(`GitHub 发布数据无法解析，可能需要更新插件版本`);
-        try {
-            const data = JSON.parse(dataJson[1]) as Record<string, string>;
-            const sha = data.mirror;
-            if (typeof sha != 'string') throw new Error();
-            return [
-                `https://fastly.jsdelivr.net/gh/EhTagTranslation/Database@${sha}/db.html.json`,
-                `https://gcore.jsdelivr.net/gh/EhTagTranslation/Database@${sha}/db.html.json`,
-                `https://cdn.jsdelivr.net/gh/EhTagTranslation/Database@${sha}/db.html.json`,
-                `https://testingcf.jsdelivr.net/gh/EhTagTranslation/Database@${sha}/db.html.json`,
-                `https://test1.jsdelivr.net/gh/EhTagTranslation/Database@${sha}/db.html.json`,
-                `https://originfastly.jsdelivr.net/gh/EhTagTranslation/Database@${sha}/db.html.json`,
-                `https://cdn.statically.io/gh/EhTagTranslation/Database/${sha}/db.html.json`,
-                `https://rawcdn.githack.com/EhTagTranslation/Database/${sha}/db.html.json`,
-            ];
-        } catch {
-            throw new Error(`GitHub 发布数据无法解析，可能需要更新插件版本`);
-        }
+        const asset = version.assets.find((asset) => asset.name === 'db.html.json');
+        if (!asset) return [];
+        return [
+            `https://cors.cooked-potatoes.workers.dev/${asset.browser_download_url}`,
+        ];
     }
 
     private async fetchData(
