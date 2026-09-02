@@ -68,7 +68,7 @@ export class DatabaseUpdater {
                 this.logger.log('Successfully updated tag database to:', version);
                 return version;
             } else {
-                this.logger.log('更新新版本失败', version);
+                this.logger.log('Error occurred updating tag database to:', version);
                 return undefined;
             }
         });

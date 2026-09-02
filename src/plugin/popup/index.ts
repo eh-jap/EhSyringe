@@ -107,7 +107,7 @@ export class Popup {
                 this.state.versionInfo = '已是最新版本';
             }
         } catch (ex) {
-            this.logger.error('获取失败', ex);
+            this.logger.error('Unable to check updates of self:', ex);
             const message = (ex instanceof Error ? ex.message : '未知错误') || '未知错误';
             this.state.versionInfo = `获取失败：${message}`;
         }

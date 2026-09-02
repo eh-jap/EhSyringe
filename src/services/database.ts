@@ -77,8 +77,8 @@ export class Database {
             this.logger.log(`Download successful:`, url);
             return result;
         } catch (ex) {
-            this.logger.warn(`尝试从 ${url} 下载失败`, ex);
-            throw new Error(`从 ${url} 下载失败: ${(ex as Error).message || String(ex)}`);
+            this.logger.warn(`Failed to download ${url}, reason:`, ex);
+            throw new Error(`Unable to download ${url}, reason: ${(ex as Error).message || String(ex)}`);
         }
     }
 
@@ -97,11 +97,11 @@ export class Database {
         } catch (ex) {
             this.logger.error(`无效的外部数据库 URL ${url}：${(ex as Error).message || String(ex)}`);
         }
-        this.logger.debug(`从 URL ${url} 加载外部数据库`);
+        this.logger.debug(`Will fetch user tag database from:`, url);
         try {
             return await this.fetchData(undefined, 0, url, undefined);
         } catch (ex) {
-            this.logger.error(`加载外部数据库失败：${(ex as Error).message || String(ex)}`);
+            this.logger.error(`Failed to fetch user tag database: ${(ex as Error).message || String(ex)}`);
             return undefined;
         }
     }
