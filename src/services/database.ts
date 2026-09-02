@@ -74,7 +74,7 @@ export class Database {
             if (version && result?.head?.sha !== version.target_commitish) {
                 throw new Error(`版本不匹配: ${result?.head?.sha} !== ${version.target_commitish}`);
             }
-            this.logger.log(`从 ${url} 下载成功`);
+            this.logger.log(`Download successful:`, url);
             return result;
         } catch (ex) {
             this.logger.warn(`尝试从 ${url} 下载失败`, ex);
@@ -86,7 +86,7 @@ export class Database {
         const config = await this.storage.get('config');
         const url = config?.overrideDbUrl?.trim();
         if (!url) {
-            this.logger.debug(`未配置外部数据库 URL`);
+            this.logger.debug(`Skip fetching user tag database as URL was not set.`);
             return undefined;
         }
         try {

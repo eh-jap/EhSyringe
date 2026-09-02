@@ -37,7 +37,7 @@ export class Messaging {
         key: K,
         listener: (args: Req<K>) => Promise<Res<K>> | Res<K>,
     ): MessageListener<K, Req<K>, Res<K>> {
-        this.logger.log(`监听事件`, key);
+        this.logger.log(`Registering handler for event:`, key);
         return messaging.on(key, listener);
     }
     off<K extends MessageKey>(listener: MessageListener<K, Req<K>, Res<K>>): boolean {

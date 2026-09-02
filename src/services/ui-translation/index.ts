@@ -28,7 +28,7 @@ export class UiTranslation {
             return results;
         }
         const path = url.pathname + url.search;
-        this.logger.log('获取 UI 翻译：', path);
+        this.logger.log('Loading interface translation for', path);
         dataMaps
             .filter((d) => d.regex.test(path) && hostMatches(location.hostname, d.hosts))
             .forEach((d) => {

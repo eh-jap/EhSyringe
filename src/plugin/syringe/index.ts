@@ -307,7 +307,7 @@ export class Syringe {
         const { body } = document;
         if (body) {
             const nodes = childNodes(body);
-            this.logger.warn(`有 ${nodes.length} 个节点在注入前加载`, nodes);
+            this.logger.warn(`Processing ${nodes.length} DOM nodes created before us`, nodes);
             for (const node of nodes) {
                 this.translateNode(node);
             }
@@ -330,7 +330,7 @@ export class Syringe {
         if (this.updatingTagMap) return;
         let updatingTagMap;
         updatingTagMap = (async () => {
-            const timer = this.logger.time('获取替换数据');
+            const timer = this.logger.time('Persisting to local tag cache took');
             try {
                 const currentSha = this.storage.get('databaseSha');
                 const data = await this.messaging.emit('get-tag-map', { ifNotMatch: currentSha });
@@ -342,9 +342,9 @@ export class Syringe {
                     this.translateTags(tagMap);
                     this.storage.set('databaseMap', tagMap);
                     this.storage.set('databaseSha', data.sha);
-                    this.logger.log('替换数据已更新', data.sha);
+                    this.logger.log('Local tag cache updated to version:', data.sha);
                 } else {
-                    this.logger.log('替换数据已经最新', data.sha);
+                    this.logger.log('No need to save to local tag cache, already has:', data.sha);
                 }
             } catch (ex) {
                 this.logger.error(ex);

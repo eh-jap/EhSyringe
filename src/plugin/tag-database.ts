@@ -54,14 +54,14 @@ export class TagDatabase {
         this.messaging.on('update-tag', (data) => this.update(data.base, data.override));
         if (data?.version !== DATA_STRUCTURE_VERSION || !dataMap || !data.sha) {
             this.tagMap.next({ sha: '', map: {} });
-            const timer = this.logger.time('数据结构变化, 重新构建数据');
+            const timer = this.logger.time('Local tag storage did not exist or format was changed, downloading and caching it again took');
             await this.storage.migrate();
             await this.messaging.emit('update-database', { force: true });
             timer.end();
         } else {
             this.tagMap.next({ ...data, map: dataMap });
         }
-        this.logger.log('标签数据库初始化完成');
+        this.logger.log('Tag database initialized.');
         this.tagMap.subscribe({
             next: () => {
                 void this.messaging.emit('tag-updated', undefined, true);
@@ -70,7 +70,7 @@ export class TagDatabase {
     }
 
     update(baseDB: EHTDatabase, overrideDb?: EHTDatabase): void {
-        const timer = this.logger.time('构建数据');
+        const timer = this.logger.time('Parsing tag data took');
         const sha = baseDB.head.sha + (overrideDb ? `+${overrideDb.head.sha}` : '');
         const map: TagMap = {};
         const check = Date.now();

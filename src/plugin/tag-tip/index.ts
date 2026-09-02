@@ -32,7 +32,7 @@ export class TagTip {
     private async init(): Promise<void> {
         const conf = await this.storage.get('config');
         if (!conf.tagTip) return;
-        this.logger.log('标签提示');
+        this.logger.log('Loading tag suggestion UI');
 
         const searchInput: HTMLInputElement | null = document.querySelector('#f_search, #newtagfield, [name=f_search]');
         if (!searchInput) return;

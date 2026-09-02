@@ -7,7 +7,7 @@ export * from '../common/menu';
 @Service()
 class MenuProvider {
     constructor(readonly logger: Logger) {
-        logger.warn(`不支持右键菜单`);
+        logger.warn(`Context menu support is not available in UserScript mode.`);
     }
 
     createMenu(_info: Menu): void {

@@ -51,11 +51,11 @@ export class DatabaseUpdater {
             }
 
             if (force) {
-                this.logger.log('强制更新', version);
+                this.logger.log('Forcefully updating tag database to:', version);
             } else if (!(await this.messaging.emit('get-tag-sha', undefined)).startsWith(version.sha)) {
-                this.logger.log('有新版本', version);
+                this.logger.log('Tag database outdated, updating to:', version);
             } else {
-                this.logger.log('没有新版本', version);
+                this.logger.log('Already on latest tag database:', version);
                 return undefined;
             }
 
@@ -65,7 +65,7 @@ export class DatabaseUpdater {
             const success = await updating;
             this.updating = undefined;
             if (success) {
-                this.logger.log('有新版本并更新', version);
+                this.logger.log('Successfully updated tag database to:', version);
                 return version;
             } else {
                 this.logger.log('更新新版本失败', version);
@@ -182,7 +182,7 @@ export class DatabaseUpdater {
             throw new Error('无法获取版本信息');
         }
         const info = checkData.githubRelease;
-        const timer = this.logger.time(`开始下载`);
+        const timer = this.logger.time(`Downloading tag database took`);
         try {
             this.pushDownloadStatus({ info: '0%', progress: 0 });
             this.badge.set('0', '#4A90E2', 1);

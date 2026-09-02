@@ -8,7 +8,7 @@ interface Timer {
 
 @Service()
 export class Logger {
-    readonly prefix = __type === 'user-script' ? '💉 脚本 ' : '💉 插件 ';
+    readonly prefix = __type === 'user-script' ? '💉 (Script Mode) ' : '💉 (Plugin Mode) ';
     readonly log: (message: string, ...optionalParams: unknown[]) => void = console.log.bind(console, this.prefix);
     readonly info: (message: string, ...optionalParams: unknown[]) => void = console.info.bind(console, this.prefix);
     readonly warn: (message: string, ...optionalParams: unknown[]) => void = console.warn.bind(console, this.prefix);
