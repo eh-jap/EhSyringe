@@ -637,7 +637,7 @@ export class Syringe {
         }
 
         if (isElement(node, 'div') && node.id === 'gdd') {
-            /* E-Hentai-Downloader 兼容处理 */
+            /* Compatibility with E-Hentai-Downloader */
             this.cloneAndPrependElement(node.firstElementChild!);
         }
     }
