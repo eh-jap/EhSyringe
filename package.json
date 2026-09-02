@@ -14,7 +14,7 @@
     "packageManager": "pnpm@11.11.0",
     "license": "MIT",
     "bugs": "https://github.com/EhTagTranslation/EhSyringe/issues",
-    "homepage": "https://github.com/EhTagTranslation/EhSyringe",
+    "homepage": "https://github.com/eh-jap/EhSyringe",
     "type": "module",
     "scripts": {
         "start:monkey": "webpack serve --mode=development --env type=user-script",
