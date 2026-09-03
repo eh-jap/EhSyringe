@@ -104,10 +104,10 @@ export class Storage {
         config: {
             translateUi: true,
             translateTag: true,
-            translateTimestamp: true,
-            showIntroduce: true,
+            translateTimestamp: false,
+            showIntroduce: false,
             showIcon: true,
-            introduceImageLevel: ImageLevel.r18g,
+            introduceImageLevel: ImageLevel.r18,
             autoUpdate: true,
             tagTip: true,
             overrideDbUrl: '',
