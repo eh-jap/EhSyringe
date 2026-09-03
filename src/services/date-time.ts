@@ -67,7 +67,7 @@ export class DateTime {
         const now = new Date(nowTime);
         if (his.getFullYear() === now.getFullYear()) {
             if (his.getMonth() === now.getMonth() && his.getDate() === now.getDate()) {
-                return `今天 ${(withSecond ? timeWithSecondFormatter : timeFormatter).format(his)}`;
+                return `今日 ${(withSecond ? timeWithSecondFormatter : timeFormatter).format(his)}`;
             }
             return (withSecond ? noYearDateTimeWithSecondFormatter : noYearDateTimeFormatter).format(his);
         }
@@ -81,19 +81,18 @@ export class DateTime {
         const nHour = diffTime / DateTime.hour;
         const nMin = diffTime / DateTime.minute;
 
-        // Note: 一天前 不是 昨天，一年前 也不是 去年
         if (nYear >= 1) return `${Math.floor(nYear)} 年前`;
-        else if (nMonth >= 1) return `${Math.floor(nMonth)} 个月前`;
-        else if (nDay >= 1) return `${Math.floor(nDay)} 天前`;
-        else if (nHour >= 1) return `${Math.floor(nHour)} 小时前`;
-        else if (nMin >= 1) return `${Math.floor(nMin)} 分钟前`;
-        else if (nMin >= 0) return '刚刚';
-        else if (nMin > -1) return '马上';
-        else if (nHour > -1) return `${Math.floor(-nMin)} 分钟后`;
-        else if (nDay > -1) return `${Math.floor(-nHour)} 小时后`;
-        else if (nMonth > -1) return `${Math.floor(-nDay)} 天后`;
-        else if (nYear > -1) return `${Math.floor(-nMonth)} 个月后`;
-        else return `${Math.floor(-nYear)} 年后`;
+        else if (nMonth >= 1) return `${Math.floor(nMonth)} ヶ月前`;
+        else if (nDay >= 1) return `${Math.floor(nDay)} 日前`;
+        else if (nHour >= 1) return `${Math.floor(nHour)} 時間前`;
+        else if (nMin >= 1) return `${Math.floor(nMin)} 分前`;
+        else if (nMin >= 0) return 'たった今';
+        else if (nMin > -1) return 'もうすぐ';
+        else if (nHour > -1) return `${Math.floor(-nMin)} 分後`;
+        else if (nDay > -1) return `${Math.floor(-nHour)} 時間後`;
+        else if (nMonth > -1) return `${Math.floor(-nDay)} 日後`;
+        else if (nYear > -1) return `${Math.floor(-nMonth)} ヶ月後`;
+        else return `${Math.floor(-nYear)} 年後`;
     }
 
     diff(
