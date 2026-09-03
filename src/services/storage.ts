@@ -33,9 +33,9 @@ export interface StorageItems {
         | undefined
         | {
               sha: string;
-              /** 上次检查时间 */
+              /** Last update check on the remote tag database */
               check: number;
-              /** 插件数据结构版本 */
+              /** Storage format version (local) */
               version: number;
           };
 
