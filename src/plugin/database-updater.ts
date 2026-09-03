@@ -115,7 +115,7 @@ export class DatabaseUpdater {
             this.badge.set('OK', '#00C801');
             this.pushDownloadStatus({
                 run: true,
-                info: '更新完成',
+                info: '成功',
                 progress: 100,
                 complete: true,
             });
@@ -133,7 +133,7 @@ export class DatabaseUpdater {
             this.pushDownloadStatus({
                 run: false,
                 error: true,
-                info: e?.message ? e.message : '更新失败',
+                info: e?.message ? e.message : 'エラー',
             });
             return false;
         }

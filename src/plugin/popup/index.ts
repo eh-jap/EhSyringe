@@ -89,7 +89,7 @@ export class Popup {
     }
 
     async checkVersion(): Promise<void> {
-        this.state.versionInfo = '检查中...';
+        this.state.versionInfo = '読み込み中...';
 
         const currentSha = await this.messaging.emit('get-tag-sha', undefined);
         const updateTime = (await this.storage.get('databaseInfo'))?.check;
@@ -102,14 +102,14 @@ export class Popup {
             const hasNewData = (this.state.updateAvailable = !currentSha.startsWith(data.sha));
             if (hasNewData) {
                 this.state.newSha = data.sha.slice(0, 7);
-                this.state.versionInfo = `有更新！`;
+                this.state.versionInfo = `利用可能`;
             } else {
-                this.state.versionInfo = '已是最新版本';
+                this.state.versionInfo = 'ありません';
             }
         } catch (ex) {
             this.logger.error('Unable to check updates of self:', ex);
-            const message = (ex instanceof Error ? ex.message : '未知错误') || '未知错误';
-            this.state.versionInfo = `获取失败：${message}`;
+            const message = (ex instanceof Error ? ex.message : '不明') || '不明';
+            this.state.versionInfo = `エラー ${message}`;
         }
     }
 
@@ -245,18 +245,18 @@ export class Popup {
         const state = this.state;
 
         const checkboxList: Array<{ key: keyof ConfigData; name: string }> = [
-            { key: 'translateUi', name: '翻译界面' },
-            { key: 'translateTag', name: '翻译标签' },
-            { key: 'translateTimestamp', name: '翻译时间戳' },
-            { key: 'showIntroduce', name: '标签介绍' },
-            { key: 'showIcon', name: '显示标签图标' },
-            { key: 'tagTip', name: '搜索提示' },
-            { key: 'autoUpdate', name: '自动更新' },
+            { key: 'translateUi', name: 'サイト翻訳を有効化する' },
+            { key: 'translateTag', name: 'タグを翻訳する' },
+            { key: 'translateTimestamp', name: '日付や時刻などを翻訳する' },
+            { key: 'showIntroduce', name: 'クリックでタグ詳細を表示する' },
+            { key: 'showIcon', name: '一部のタグに絵文字／アイコンを表示させる' },
+            { key: 'tagTip', name: '検索候補を使用する' },
+            { key: 'autoUpdate', name: '自動的にアップデート' },
         ];
         return html`
             <div id="ehs-setting-panel" class="ehs-panel ${state.showSettingPanel ? 'ehs-show' : ''}">
                 <div class="header">
-                    <div>设置</div>
+                    <div>設定</div>
                     <div class="cushion"></div>
                     <div>
                         <a
@@ -295,10 +295,10 @@ export class Popup {
                     )}
                     <div class="image-level">
                         <p class="range-title">
-                            介绍图片:
+                            詳細で表示するタグ関連画像:
                             <span
                                 >${
-                                    ['隐藏全部', '隐藏色情图片', '隐藏引起不适的图片', '全部显示'][
+                                    ['表示しない', '健全のみ', 'グロ画像を除外', 'すべて表示'][
                                         state.configValue.introduceImageLevel
                                     ]
                                 }</span
@@ -319,10 +319,10 @@ export class Popup {
                         </div>
                         <div class="range-label" @click="${(ev: Event) => ev.preventDefault()}">
                             <a href="#" @click="${() => this.changeConfigValue('introduceImageLevel', ImageLevel.hide)}"
-                                >禁用</a
+                                >非表示</a
                             >
                             <a href="#" @click="${() => this.changeConfigValue('introduceImageLevel', ImageLevel.nonH)}"
-                                >非H</a
+                                >全年齢</a
                             >
                             <a href="#" @click="${() => this.changeConfigValue('introduceImageLevel', ImageLevel.r18)}"
                                 >R18</a
@@ -333,7 +333,7 @@ export class Popup {
                         </div>
                     </div>
                     <div class="override-db">
-                        <label for="overrideDbUrl">外部数据库: </label>
+                        <label for="overrideDbUrl">追加タグデータ: </label>
                         <input
                             id="overrideDbUrl"
                             type="text"
@@ -369,7 +369,7 @@ export class Popup {
                     }}"
                     class="action ${this.changeConfigUnsaved() ? 'primary' : ''}"
                 >
-                    保存
+                    完了
                 </button>
             </div>
         `;
@@ -391,7 +391,7 @@ export class Popup {
                             state.showSettingPanel = true;
                             ev.preventDefault();
                         }}"
-                        >设置</a
+                        >設定</a
                     >
                 </div>
             </div>
@@ -409,7 +409,7 @@ export class Popup {
                 </div>
                 <table>
                     <tr>
-                        <th>标签版本：</th>
+                        <th>コミット:</th>
                         <td>
                             <a href="https://github.com/eh-jap/Database/tree/${state.sha}" class="monospace"
                                 >${state.sha || ' --- '}</a
@@ -417,13 +417,13 @@ export class Popup {
                         </td>
                     </tr>
                     <tr>
-                        <th>上次更新：</th>
+                        <th>前回のアプデ:</th>
                         <td>
                             <span>${state.updateTime || ' --- '}</span>
                         </td>
                     </tr>
                     <tr>
-                        <th>更新检查：</th>
+                        <th>アップデート:</th>
                         <td>
                             <span class="${state.updateAvailable ? 'hasNew' : ''}">
                                 ${state.versionInfo}
@@ -444,7 +444,7 @@ export class Popup {
                 class="action ${state.updateAvailable ? 'primary' : ''}"
                 id="updateButton"
             >
-                更新
+                アップデート
             </button>
         </div>`;
     }
