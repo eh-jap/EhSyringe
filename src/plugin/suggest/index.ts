@@ -32,7 +32,7 @@ const NS_SCORE = Object.freeze({
     '': 0, // rows
 } satisfies Record<EHTNamespaceNameShort, number>);
 
-/** 生成完成项 */
+/** Generates completion item. */
 function markTag(tag: TagItem, search: string, term: string): Suggestion | undefined {
     let score = 0;
     const match: Suggestion['match'] = {};
@@ -94,7 +94,7 @@ export class Suggest {
         await this.update();
         if (!this.tagList.length) return [];
 
-        const timer = this.logger.time(`搜索：${term}`);
+        const timer = this.logger.time(`Querying ${term} took`);
         let sTerm = term.toLowerCase().normalize();
         const col = sTerm.indexOf(':');
         let tagList = this.tagList;
@@ -130,7 +130,7 @@ export class Suggest {
         if (limit > 0 && suggestions.length > limit) {
             suggestions.length = limit;
         }
-        this.logger.debug(`搜索：${term} (${terms.join(', ')})`, suggestions);
+        this.logger.debug(`Query ${term} (${terms.join(', ')}), results:`, suggestions);
         timer.end();
         return suggestions;
     }

@@ -27,7 +27,7 @@ export class Introduce {
 
         if (!(tagList && gridRight)) return;
 
-        this.logger.log('标签介绍');
+        this.logger.log('Loading tag description UI');
         this.initIntroduceBox();
         gridRight.insertBefore(this.introduceBox, null);
 
@@ -91,7 +91,7 @@ export class Introduce {
     }
 
     async openIntroduceBox(namespace: EHTNamespaceName, key: string, canceled: () => boolean): Promise<void> {
-        const timer = this.logger.time('获取标签介绍');
+        const timer = this.logger.time('Getting tag description took');
         const tagData = await this.messaging.emit('get-tag', this.tagging.fullKey({ namespace, key }));
         timer.log(tagData);
         timer.end();
