@@ -248,7 +248,7 @@ export class Popup {
             { key: 'translateUi', name: 'サイト翻訳を有効化する' },
             { key: 'translateTag', name: 'タグを翻訳する' },
             { key: 'translateTimestamp', name: '日付や時刻などを翻訳する' },
-            { key: 'showIntroduce', name: 'クリックでタグ詳細を表示する' },
+            { key: 'showIntroduce', name: '選択された時、タグ詳細を表示する' },
             { key: 'showIcon', name: '一部のタグに絵文字／アイコンを表示させる' },
             { key: 'tagTip', name: '検索候補を使用する' },
             { key: 'autoUpdate', name: '自動的にアップデート' },
